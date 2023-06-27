@@ -15,6 +15,11 @@ public class CmdExecute implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("last_death") && sender instanceof Player) {
+            if (Plugin.deathPoints.get(sender.getName()) == null) {
+                sender.sendMessage(ChatColor.GOLD + "Последние координаты не найдены");
+                return true;
+            }
+
             if (args.length == 0) {
                 Location loc = Plugin.deathPoints.get(sender.getName());
                 sender.sendMessage(
